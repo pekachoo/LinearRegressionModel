@@ -36,6 +36,23 @@ def calculate_derivatives(x_points, y_points, slope, intercept):
     return dJ_dw, dJ_db
 
 
+def gradiant_descent(x_points, y_points, slope_i, intercept_i, l_rate, num_iterations):
+    cost_arr = [cost_function(slope_i, intercept_i, x_points.shape[0], x_points, y_points)]
+    slope_arr = [slope_i]
+
+    slope = slope_i
+    intercept = intercept_i
+
+    for i in range(num_iterations):
+        dJ_dw, dJ_db = calculate_derivatives(x_points, y_points, slope_i, intercept_i)
+        slope = slope - l_rate * dJ_dw
+        intercept = intercept - l_rate * dJ_db
+
+        cost_arr.append(cost_function(slope, intercept, x_points.shape[0], x_points, y_points))
+        slope_arr.append(slope)
+    return cost_arr, slope_arr, slope, intercept
+
+
 # read file data
 
 data = pd.read_csv('Housing.csv')
