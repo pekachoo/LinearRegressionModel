@@ -13,15 +13,27 @@ def cost_function(slope, intercept, size, x_points, y_points):
     for i in range(size):
         f_wb = slope * x_points[i] + intercept
         y_i = y_points[i]
-        total_cost += ((f_wb - y_i) ** 2) / (2 * size)
+        total_cost += ((f_wb - y_i) ** 2)
+    return total_cost / (2 * size)
 
 
-# def gradient_descent(l_rate, x_points, y_points, slope, intercept, size):
-#     # batch gradient descent
-#     for i in range(size):
-#         x_i = x_points[i]
-#         y_i = y_points[i]
-#         f_wb = slope * x_points[i] + intercept
+def calculate_derivatives(x_points, y_points, slope, intercept):
+    # batch gradient descent
+    size = x_points.shape[0]
+    dJ_dw = 0
+    dJ_db = 0
+
+    for i in range(size):
+        x_i = x_points[i]
+        y_i = y_points[i]
+        f_wb = slope * x_points[i] + intercept
+        temp_dJ_dw = (f_wb - y_i) * x_i
+        temp_dJ_db = (f_wb - y_i)
+        dJ_dw += temp_dJ_dw
+        dJ_db += temp_dJ_db
+    dJ_dw = dJ_dw / size
+    dJ_db = dJ_db / size
+    return dJ_dw, dJ_db
 
 
 # read file data
