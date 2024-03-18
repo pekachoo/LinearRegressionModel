@@ -73,7 +73,7 @@ costs, slopes, slope, intercept, iterations = gradiant_descent(areas, prices, 0,
 costs = np.array(costs)
 slopes = np.array(slopes)
 # plt.plot(slopes, costs, 'o')
-plt.plot(iterations, costs)
+plt.plot(slopes, costs)
 # for i in range(slopes.shape[0]):
 #     plt.plot()
 
