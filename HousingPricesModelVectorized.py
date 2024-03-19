@@ -47,4 +47,16 @@ def cost_function_multiple(x, y, w, intercept):
     return total_cost
 
 
-
+def calculate_derivatives_multiple(x, y, w, b):
+    size = x.shape[0]
+    dj_dw = 0
+    dj_db = 0
+    for i in range(size):
+        x_i = x[i] # array of x's in each feature i
+        y_i = y[i] # corresponding price
+        f_wb = np.dot(w, x_i) + intercept
+        dj_dw += (f_wb - y_i)*x_i
+        dj_db += f_wb - y_i
+    dj_dw = dj_dw/size
+    dj_db = dj_db/size
+    return dj_dw, dj_db
