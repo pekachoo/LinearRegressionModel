@@ -11,7 +11,6 @@ bathrooms = np.array(data['bathrooms'])
 bedrooms = np.array(data['bedrooms'])
 # converts it into a 2d array with each index being a training set
 features = np.column_stack((areas, stories, bathrooms, bedrooms))
-print(features)
 
 
 def cost_function(x, y, w, intercept):
@@ -49,14 +48,21 @@ def cost_function_multiple(x, y, w, intercept):
 
 def calculate_derivatives_multiple(x, y, w, b):
     size = x.shape[0]
-    dj_dw = 0
+    num_features = x.shape[1]
+    dj_dw = np.zeros((size,)) # dj_dw is now an array with the derivatives of each w
     dj_db = 0
     for i in range(size):
-        x_i = x[i] # array of x's in each feature i
-        y_i = y[i] # corresponding price
-        f_wb = np.dot(w, x_i) + intercept
-        dj_dw += (f_wb - y_i)*x_i
+        x_i = x[i]  # array of x's in each feature i
+        y_i = y[i]  # corresponding price
+        f_wb = np.dot(w, x_i) + b
+        for j in range(num_features):
+            dj_dw[i][j] += (f_wb - y_i) * x[i][j]
         dj_db += f_wb - y_i
-    dj_dw = dj_dw/size
-    dj_db = dj_db/size
+    dj_dw = dj_dw / size
+    dj_db = dj_db / size
     return dj_dw, dj_db
+
+
+def gradient_descent_multiple(x, y, w, b):
+    size = x.shape[0]
+    num_features = x.shape[1]
