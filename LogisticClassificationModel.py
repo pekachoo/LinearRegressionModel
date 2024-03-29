@@ -19,6 +19,7 @@ def cost_function(X, y, w, b):
         f_wb = sigmoid(z_wb)
         loss_value = (-y_i * np.log(f_wb)) - (1 - y_i) * np.log(1 - f_wb)
         total_cost += loss_value
+    total_cost = total_cost/m
     return total_cost
 
 
@@ -40,6 +41,7 @@ def calculate_derivatives(X, y, w, b):
 
 def gradient_descent(X, y, w_i, b_i, l_rate, num_iterations):
     m, n = X.shape
+    print(m, n)
     cost_arr = [cost_function(X, y, w_i, b_i)]
     slope_arr = [w_i]
     intercept_arr = [b_i]
@@ -71,7 +73,7 @@ bmd_list = bmd_list.reshape(len(bmd_list), 1)
 # print(fracture_list)
 # print(cost_function(bmd_list, fracture_list, np.zeros(len(bmd_list[0])), 0))
 # plot data circle for true, x for false
-costs, slopes, intercepts, iterations, final_w, final_b = gradient_descent(bmd_list, fracture_list, np.zeros(len(bmd_list[0])), 0, 0.005, 3000)
+costs, slopes, intercepts, iterations, final_w, final_b = gradient_descent(bmd_list, fracture_list, np.zeros(len(bmd_list[0])), 0, 1.5, 3000)
 #
 print(costs)
 plt.scatter(iterations, costs, color='red')
