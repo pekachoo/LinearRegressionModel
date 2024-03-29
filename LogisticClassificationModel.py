@@ -41,7 +41,6 @@ def calculate_derivatives(X, y, w, b):
 
 def gradient_descent(X, y, w_i, b_i, l_rate, num_iterations):
     m, n = X.shape
-    print(m, n)
     cost_arr = [cost_function(X, y, w_i, b_i)]
     slope_arr = [w_i]
     intercept_arr = [b_i]
@@ -75,7 +74,6 @@ bmd_list = bmd_list.reshape(len(bmd_list), 1)
 # plot data circle for true, x for false
 costs, slopes, intercepts, iterations, final_w, final_b = gradient_descent(bmd_list, fracture_list, np.zeros(len(bmd_list[0])), 0, 1.5, 3000)
 #
-print(costs)
 plt.scatter(iterations, costs, color='red')
 plt.show()
 # print(slopes)
